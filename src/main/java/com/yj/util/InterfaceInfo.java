@@ -3,9 +3,19 @@ package com.yj.util;
 public class InterfaceInfo {
 
     private String url;
-    private String interfaceName;
-    private String interfaceNo;
-    private String requestType;//post-get
+    private String apiName;
+    private String apiId;
+    private String type;//post-get
+
+    @Override
+    public String toString() {
+        return "InterfaceInfo{" +
+                "url='" + url + '\'' +
+                ", apiName='" + apiName + '\'' +
+                ", apiId='" + apiId + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 
     public String getUrl() {
         return url;
@@ -15,37 +25,27 @@ public class InterfaceInfo {
         this.url = url;
     }
 
-    public String getInterfaceName() {
-        return interfaceName;
+    public String getApiName() {
+        return apiName;
     }
 
-    public void setInterfaceName(String interfaceName) {
-        this.interfaceName = interfaceName;
+    public void setApiName(String apiName) {
+        this.apiName = apiName;
     }
 
-    public String getInterfaceNo() {
-        return interfaceNo;
+    public String getApiId() {
+        return apiId;
     }
 
-    public void setInterfaceNo(String interfaceNo) {
-        this.interfaceNo = interfaceNo;
+    public void setApiId(String apiId) {
+        this.apiId = apiId;
     }
 
-    public String getRequestType() {
-        return requestType;
+    public String getType() {
+        return type;
     }
 
-    public void setRequestType(String requestType) {
-        this.requestType = requestType;
-    }
-
-    @Override
-    public String toString() {
-        return "InterfaceInfo{" +
-                "url='" + url + '\'' +
-                ", interfaceName='" + interfaceName + '\'' +
-                ", interfaceNo='" + interfaceNo + '\'' +
-                ", requestType='" + requestType + '\'' +
-                '}';
+    public void setType(String type) {
+        this.type = type;
     }
 }

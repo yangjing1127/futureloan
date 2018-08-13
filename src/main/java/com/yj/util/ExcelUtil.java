@@ -1,5 +1,6 @@
 package com.yj.util;
 
+import com.yj.bean.Case;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.util.StringUtils;
 
@@ -7,12 +8,90 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ExcelUtil {
 
+    public static void loadDatas(String filePath,String sheetName,Class clazz){
+        InputStream inputStream=null;
+        try{
+            //准备输入流对象
+            inputStream=new FileInputStream(new File(filePath));
+            //获取workbook
+            Workbook workbook=WorkbookFactory.create(inputStream);
+            //获取表单对象
+            Sheet sheet=workbook.getSheet(sheetName);
+            //解析所有的数据行
+            int lastRowNum=sheet.getLastRowNum();
+
+            //拿到标题行的数据
+            Row titleRow=sheet.getRow(0);
+            int lastCellNum=titleRow.getLastCellNum();
+
+            //标题列表
+            String[] titles=new String[lastCellNum];
+            for (int i = 0; i < lastCellNum; i++) {
+                Cell cell=titleRow.getCell(i,Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+                cell.setCellType(CellType.STRING);
+                String title=cell.getStringCellValue();
+                titles[i]=title;
+            }
+            for (int i = 1; i <= lastRowNum; i++) {
+               Row row= sheet.getRow(i);
+               Object object=clazz.newInstance();
+
+//               int lastCellNum=row.getLastCellNum();
+                for (int j = 0; j <lastCellNum ; j++) {
+                    //取出每一列
+                    Cell cell=row.getCell(j,Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+                    //设置列的数据类型
+                    cell.setCellType(CellType.STRING);
+                    String value=cell.getStringCellValue();
+
+                    //需要赋值了
+                    //取出此列对应的标题
+                    String title=titles[j];
+//                    if(title.equals("ApiId(接口编号)")){ 这种写法耦合性太强
+//                        interfaceInfo.setInterfaceNo(value);
+//                    }
+                    String methodName= "set"+title.substring(0,title.indexOf("("));
+                    //通过方法名拿到方法对象
+                    Method method=clazz.getMethod(methodName,String.class);
+                    method.invoke(object,value);
+                }
+                //添加到集合
+                //判断对象类型，通过instanceof 关键字来实现
+                if (object instanceof Case){
+                    Case cs= (Case) object;
+                    CaseUtil.cases.add(cs);
+                }else if (object instanceof InterfaceInfo){
+                    InterfaceInfo info= (InterfaceInfo) object;
+                    HttpClientUtil.rests.add(info);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (inputStream!=null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * 用于dataprovider
+     * @param filePath
+     * @param sheetName
+     * @param cellNames
+     * @return
+     */
     public static Object[][] readDataByCellNames(String filePath,String sheetName,String[] cellNames){
         InputStream inputStream=null;
         ArrayList<ArrayList<String>> groups=new ArrayList<ArrayList<String>>();

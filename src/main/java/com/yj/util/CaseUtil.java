@@ -1,6 +1,17 @@
 package com.yj.util;
 
+import com.yj.bean.Case;
+import org.apache.poi.ss.usermodel.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.Inflater;
 
@@ -9,11 +20,55 @@ import java.util.zip.Inflater;
  */
 public class CaseUtil {
 
+    public static List<Case> cases =new ArrayList<Case>();
+
+    static {
+        ExcelUtil.loadDatas("src/main/resources/cases_v4.xlsx","用例",Case.class);
+    }
+
+
+    public static Object[][] datas(String apiId,String[] cellNames){
+        //根据apiId 筛选出对应数据
+        List<Case> satisfied=new ArrayList<Case>();
+        for (Case cs:cases){
+            if(cs.getApiId().equals(apiId)){
+                satisfied.add(cs);
+            }
+        }
+        Object[][] datas=new Object[satisfied.size()][cellNames.length];
+        Class clazz=Case.class;
+        for (int i=0;i<satisfied.size();i++)
+        {
+            //eg.cellNames={"caseId","apiId","params"}
+            Case cs=satisfied.get(i);
+            for (int j = 0; j < cellNames.length; j++) {
+                String cellName=cellNames[j];
+                String methodName="get"+cellName.substring(0,cellName.indexOf("("));
+                Method method= null;
+                String value=null;
+                try {
+                    method = clazz.getMethod(
+                            methodName
+                    );
+                   value =(String)method.invoke(cs);
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                datas[i][j]=value;
+            }
+        }
+        return  datas;
+    }
+
     public static Object[][] getInterfaceInfo(String filePath,String sheetName,String[] cellNames){
         Object[][] datas = ExcelUtil.readDataByCellNames(filePath,sheetName,cellNames);
         return datas;
     }
-    public static void main(String[] args){
+    public static void main1(String[] args){
         String[] cellNames={"ApiId(接口编号)","ApiName(接口名称)","Type(接口提交方式)","Url(接口地址)"};
         Object[][] datas=CaseUtil.getInterfaceInfo("src/main/resources/cases_v3.xlsx","接口信息",cellNames);
         for (int i = 0; i < datas.length; i++) {
@@ -23,6 +78,12 @@ public class CaseUtil {
             System.out.println();
         }
     }
+    public static void main(String[] args){
+        for (Case aCase:cases){
+            System.out.println(aCase);
+        }
+    }
+
 
     /**
      * 根据用例编号获取接口基本信息
@@ -37,13 +98,14 @@ public class CaseUtil {
         String interfaceType=getInterfaceTypeByApiId(apiId);
         String interfaceUrl=getInterfaceUrlByApiId(apiId);
 
-        interfaceInfo.setInterfaceNo(apiId);
-        interfaceInfo.setInterfaceName(interfaceName);
-        interfaceInfo.setRequestType(interfaceType);
+        interfaceInfo.setApiId(apiId);
+        interfaceInfo.setApiName(interfaceName);
+        interfaceInfo.setType(interfaceType);
         interfaceInfo.setUrl(interfaceUrl);
         return interfaceInfo;
     }
 
+    @Deprecated
     private static String getInterfaceUrlByApiId(String apiId) {
         String interfaceUrl ="";
         String[] cellNames={"ApiId(接口编号)","Url(接口地址)"};
@@ -56,6 +118,7 @@ public class CaseUtil {
         return interfaceUrl;
     }
 
+    @Deprecated
     private static String getInterfaceTypeByApiId(String apiId) {
         String interfaceType ="";
         String[] cellNames={"ApiId(接口编号)","Type(接口提交方式)"};
@@ -68,6 +131,7 @@ public class CaseUtil {
         return interfaceType;
     }
 
+    @Deprecated
     private static String getInterfaceNameByApiId(String apiId) {
         String interfaceName ="";
         String[] cellNames={"ApiId(接口编号)","ApiName(接口名称)"};
@@ -78,8 +142,9 @@ public class CaseUtil {
             }
         }
         return interfaceName;
-    }
+}
 
+    @Deprecated
     private static String getApiIdByCaseId(String caseId) {
         String apiId ="";
         String[] cellNames={"CaseId(用例编号)","ApiId(接口编号)"};

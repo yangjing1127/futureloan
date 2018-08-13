@@ -11,27 +11,30 @@ import org.testng.annotations.Test;
 import java.util.Map;
 import java.util.Set;
 
-public class RegisterCase {
+public class LoginCase {
 
     @Test(dataProvider = "datas")
     public void testFutureLoan(String caseId,String apiId,String paramsStr) {
 //        System.out.println("用例编号:"+caseId+";参数："+paramsStr);
 //        InterfaceInfo interfaceInfo=CaseUtil.getInterfaceByCaseId(caseId);
 //        System.out.println(CaseUtil.getInterfaceByCaseId(caseId));
-
+//        String actualResult=HttpClientUtil.request(interfaceInfo.getUrl(),interfaceInfo.getType(),paramsStr);
         String url=HttpClientUtil.getInterfaceUrlByApiId(apiId);
         String type=HttpClientUtil.getInterfaceTypeByApiId(apiId);
         String actualResult=HttpClientUtil.request(url,type,paramsStr);
+        //完成接口调用
         System.out.println(actualResult);
+
     }
 
 
     @DataProvider(name = "datas")
     public Object[][] datas() {
         String[] cellNames={"CaseId(用例编号)","ApiId(接口编号)","Params(参数)"};
-//        Object[][] datas = ExcelUtil.readDataByCellNames("src/main/resources/cases_v3.xlsx","用例",cellNames);//效率低
-        Object[][] datas=CaseUtil.datas("1",cellNames);
+//        Object[][] datas = ExcelUtil.readDataByCellNames("src/main/resources/cases_v3.xlsx","用例",cellNames);
+        Object[][] datas=CaseUtil.datas("2",cellNames);
         return datas;
+
     }
 
     public static void main(String[] args){
@@ -43,6 +46,6 @@ public class RegisterCase {
         for (Map.Entry<String ,String> entry:entries){
             System.out.println("参数名称"+entry.getKey()+"参数值"+entry.getValue());
         }
-//       System.out.println( CaseUtil.getInterfaceByCaseId("1"));
+        System.out.println( CaseUtil.getInterfaceByCaseId("1"));
     }
 }

@@ -17,6 +17,18 @@ import java.util.Map;
 
 public class HttpClientUtil {
 
+    public static ArrayList<InterfaceInfo> rests=new ArrayList<InterfaceInfo>();
+
+    static {
+        ExcelUtil.loadDatas("src/main/resources/cases_v4.xlsx","接口信息",InterfaceInfo.class);
+    }
+
+    public static void main(String[] args){
+        for(InterfaceInfo info:rests){
+            System.out.println(info);
+        }
+    }
+
     public static String request(String url, String requestType, String paramsStr) {
         String result=null;
             Map<String, String> map = (Map<String, String>) JSONObject.parse(paramsStr);
@@ -68,4 +80,34 @@ public class HttpClientUtil {
         }
         return result;
     }
+
+
+    public static String getInterfaceUrlByApiId(String apiId) {
+        for (InterfaceInfo info:rests){
+            if (info.getApiId().equals(apiId)){
+                return info.getUrl();
+            }
+        }
+        return null;
+    }
+
+    public static String getInterfaceTypeByApiId(String apiId) {
+        for (InterfaceInfo info:rests){
+            if (info.getApiId().equals(apiId)){
+                return info.getType();
+            }
+        }
+        return null;
+    }
+
+    public static String getInterfaceNameByApiId(String apiId) {
+        for (InterfaceInfo info:rests){
+            if (info.getApiId().equals(apiId)){
+                return info.getApiName();
+            }
+        }
+        return null;
+    }
+
+
 }

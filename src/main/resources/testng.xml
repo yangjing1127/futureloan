@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default Suite">
+    <test name="futureloan">
+        <classes>
+            <class name="com.yj.futureloan.RegisterCase">
+                <methods>
+                    <include name="testFutureLoan"/>
+                </methods>
+            </class> <!-- com.yj.futureloan.RegisterCase-->
+            <class name="com.yj.futureloan.LoginCase">
+                <methods>
+                    <include name="testFutureLoan"/>
+                </methods>
+            </class> <!-- com.yj.futureloan.LoginCase -->
+        </classes>
+    </test> <!-- futureloan -->
+</suite> <!-- Default Suite -->

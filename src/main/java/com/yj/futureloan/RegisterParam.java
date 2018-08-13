@@ -2,7 +2,6 @@ package com.yj.futureloan;
 
 public class RegisterParam {
     private  String mobilephone;
-
     private String pwd;
 
     public String getMobilephone() {
