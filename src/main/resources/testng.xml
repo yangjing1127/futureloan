@@ -4,14 +4,15 @@
     <test name="futureloan">
         <classes>
             <class name="com.yj.futureloan.RegisterCase">
-                <methods>
+                <!--<methods>
                     <include name="testFutureLoan"/>
-                </methods>
-            </class> <!-- com.yj.futureloan.RegisterCase-->
+                </methods>-->
+            </class>
+            <!-- com.yj.futureloan.RegisterCase-->
             <class name="com.yj.futureloan.LoginCase">
-                <methods>
-                    <include name="testFutureLoan"/>
-                </methods>
+                <!-- <methods>
+                     <include name="testFutureLoan"/>
+                 </methods>-->
             </class> <!-- com.yj.futureloan.LoginCase -->
         </classes>
     </test> <!-- futureloan -->

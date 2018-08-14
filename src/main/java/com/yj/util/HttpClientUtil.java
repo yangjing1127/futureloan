@@ -6,6 +6,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -41,6 +42,12 @@ public class HttpClientUtil {
     }
 
     private static String doGet(String url, Map<String, String> map) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        for (Map.Entry<String,String> entry: map.entrySet()){
+            NameValuePair pair=new BasicNameValuePair(entry.getKey(),entry.getValue());
+            params.add(pair);
+        }
+//        URLEncodedUtils.format(params);
         url += "?mobilephone=" + map.get("mobilephone") + "?pwd=" + map.get("mobilephone");
         HttpGet get = new HttpGet(url);
         String result=null;
@@ -48,7 +55,6 @@ public class HttpClientUtil {
         try {
             CloseableHttpResponse httpResponse = httpClient.execute(get);
             result = EntityUtils.toString(httpResponse.getEntity());
-            System.out.println(result);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,18 +69,21 @@ public class HttpClientUtil {
 //                RegisterParam param=new RegisterParam();
 //                NameValuePair mobilePhonePair=new BasicNameValuePair("mobilephone",param.getMobilephone());
 //                NameValuePair pwdPair=new BasicNameValuePair("pwd",param.getPwd());
-            NameValuePair mobilePhonePair = new BasicNameValuePair("mobilephone", map.get("mobilephone"));
-            NameValuePair pwdPair = new BasicNameValuePair("pwd", map.get("pwd"));
+//            NameValuePair mobilePhonePair = new BasicNameValuePair("mobilephone", map.get("mobilephone"));
+//            NameValuePair pwdPair = new BasicNameValuePair("pwd", map.get("pwd"));
+
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(mobilePhonePair);
-            params.add(pwdPair);
+            for (Map.Entry<String,String> entry: map.entrySet()){
+                NameValuePair pair=new BasicNameValuePair(entry.getKey(),entry.getValue());
+                params.add(pair);
+            }
+
             //将参数封装在请求体中
             post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
             //创建客户端对象
             CloseableHttpClient httpClient = HttpClients.createDefault();
             CloseableHttpResponse httpResponse = httpClient.execute(post);
             result = EntityUtils.toString(httpResponse.getEntity());
-            System.out.println(result);
         } catch (Exception e) {
             e.printStackTrace();
         }

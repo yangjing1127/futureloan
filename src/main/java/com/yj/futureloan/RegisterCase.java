@@ -11,19 +11,19 @@ import org.testng.annotations.Test;
 import java.util.Map;
 import java.util.Set;
 
-public class RegisterCase {
+public class RegisterCase extends BaseCase{
 
-    @Test(dataProvider = "datas")
-    public void testFutureLoan(String caseId,String apiId,String paramsStr) {
-//        System.out.println("用例编号:"+caseId+";参数："+paramsStr);
-//        InterfaceInfo interfaceInfo=CaseUtil.getInterfaceByCaseId(caseId);
-//        System.out.println(CaseUtil.getInterfaceByCaseId(caseId));
-
-        String url=HttpClientUtil.getInterfaceUrlByApiId(apiId);
-        String type=HttpClientUtil.getInterfaceTypeByApiId(apiId);
-        String actualResult=HttpClientUtil.request(url,type,paramsStr);
-        System.out.println(actualResult);
-    }
+//    @Test(dataProvider = "datas")
+//    public void testFutureLoan(String caseId,String apiId,String paramsStr) {
+////        System.out.println("用例编号:"+caseId+";参数："+paramsStr);
+////        InterfaceInfo interfaceInfo=CaseUtil.getInterfaceByCaseId(caseId);
+////        System.out.println(CaseUtil.getInterfaceByCaseId(caseId));
+//
+//        String url=HttpClientUtil.getInterfaceUrlByApiId(apiId);
+//        String type=HttpClientUtil.getInterfaceTypeByApiId(apiId);
+//        String actualResult=HttpClientUtil.request(url,type,paramsStr);
+//        System.out.println(actualResult);
+//    }
 
 
     @DataProvider(name = "datas")

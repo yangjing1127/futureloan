@@ -1,19 +1,11 @@
 package com.yj.util;
 
 import com.yj.bean.Case;
-import org.apache.poi.ss.usermodel.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.zip.Inflater;
 
 /**
  * 用于管理接口信息
@@ -23,7 +15,7 @@ public class CaseUtil {
     public static List<Case> cases =new ArrayList<Case>();
 
     static {
-        ExcelUtil.loadDatas("src/main/resources/cases_v4.xlsx","用例",Case.class);
+        ExcelUtil.loadDatas(ExcelUtil.caseFilePath,"用例",Case.class);
     }
 
 
@@ -70,7 +62,7 @@ public class CaseUtil {
     }
     public static void main1(String[] args){
         String[] cellNames={"ApiId(接口编号)","ApiName(接口名称)","Type(接口提交方式)","Url(接口地址)"};
-        Object[][] datas=CaseUtil.getInterfaceInfo("src/main/resources/cases_v3.xlsx","接口信息",cellNames);
+        Object[][] datas=CaseUtil.getInterfaceInfo(ExcelUtil.caseFilePath,"接口信息",cellNames);
         for (int i = 0; i < datas.length; i++) {
             for (int j = 0; j < datas[i].length; j++) {
                 System.out.print(datas[i][j]);
@@ -109,7 +101,7 @@ public class CaseUtil {
     private static String getInterfaceUrlByApiId(String apiId) {
         String interfaceUrl ="";
         String[] cellNames={"ApiId(接口编号)","Url(接口地址)"};
-        Object[][] datas=ExcelUtil.readDataByCellNames("src/main/resources/cases_v3.xlsx","接口信息",cellNames);
+        Object[][] datas=ExcelUtil.readDataByCellNames(ExcelUtil.caseFilePath,"接口信息",cellNames);
         for (int i = 0; i < datas.length; i++) {
             if(apiId.equalsIgnoreCase((String) datas[i][0])){
                 interfaceUrl=(String) datas[i][1];
@@ -122,7 +114,7 @@ public class CaseUtil {
     private static String getInterfaceTypeByApiId(String apiId) {
         String interfaceType ="";
         String[] cellNames={"ApiId(接口编号)","Type(接口提交方式)"};
-        Object[][] datas=ExcelUtil.readDataByCellNames("src/main/resources/cases_v3.xlsx","接口信息",cellNames);
+        Object[][] datas=ExcelUtil.readDataByCellNames(ExcelUtil.caseFilePath,"接口信息",cellNames);
         for (int i = 0; i < datas.length; i++) {
             if(apiId.equalsIgnoreCase((String) datas[i][0])){
                 interfaceType=(String) datas[i][1];
@@ -135,7 +127,7 @@ public class CaseUtil {
     private static String getInterfaceNameByApiId(String apiId) {
         String interfaceName ="";
         String[] cellNames={"ApiId(接口编号)","ApiName(接口名称)"};
-        Object[][] datas=ExcelUtil.readDataByCellNames("src/main/resources/cases_v3.xlsx","接口信息",cellNames);
+        Object[][] datas=ExcelUtil.readDataByCellNames(ExcelUtil.caseFilePath,"接口信息",cellNames);
         for (int i = 0; i < datas.length; i++) {
             if(apiId.equalsIgnoreCase((String) datas[i][0])){
                 interfaceName=(String) datas[i][1];
@@ -148,7 +140,7 @@ public class CaseUtil {
     private static String getApiIdByCaseId(String caseId) {
         String apiId ="";
         String[] cellNames={"CaseId(用例编号)","ApiId(接口编号)"};
-        Object[][] datas=ExcelUtil.readDataByCellNames("src/main/resources/cases_v3.xlsx","用例",cellNames);
+        Object[][] datas=ExcelUtil.readDataByCellNames(ExcelUtil.caseFilePath,"用例",cellNames);
         for (int i = 0; i < datas.length; i++) {
             if(caseId.equalsIgnoreCase((String) datas[i][0])){
                 apiId=(String) datas[i][1];
