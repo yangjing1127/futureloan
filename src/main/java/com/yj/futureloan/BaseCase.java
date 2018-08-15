@@ -2,6 +2,7 @@ package com.yj.futureloan;
 
 import com.yj.util.ExcelUtil;
 import com.yj.util.HttpClientUtil;
+import org.testng.Reporter;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Test;
 
@@ -16,7 +17,7 @@ public class BaseCase {
         String type=HttpClientUtil.getInterfaceTypeByApiId(apiId);
         String actualResult=HttpClientUtil.request(url,type,paramsStr);
 //        完成接口调用
-//        System.out.println(actualResult);
+        Reporter.log(actualResult);
         //单次写入数据
 //        ExcelUtil.writeData(ExcelUtil.caseFilePath,"用例",caseId,"ActualResponseData",actualResult);
         //数据保存到List中

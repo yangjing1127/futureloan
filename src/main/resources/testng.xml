@@ -8,12 +8,15 @@
                     <include name="testFutureLoan"/>
                 </methods>-->
             </class>
-            <!-- com.yj.futureloan.RegisterCase-->
+            <!-- com.yj.futureloan.RegisterCase 注册-->
             <class name="com.yj.futureloan.LoginCase">
                 <!-- <methods>
                      <include name="testFutureLoan"/>
                  </methods>-->
-            </class> <!-- com.yj.futureloan.LoginCase -->
+            </class> <!-- com.yj.futureloan.LoginCase 登录-->
+
+            <class name="com.yj.futureloan.RechargeCase">
+            </class><!-- com.yj.futureloan.RegisterCase 充值-->
         </classes>
     </test> <!-- futureloan -->
 </suite> <!-- Default Suite -->
