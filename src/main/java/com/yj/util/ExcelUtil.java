@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ExcelUtil {
 
-    public static String caseFilePath = "src/main/resources/cases_v4.xlsx";
+    public static String caseFilePath = PropertiesUtil.getCaseFile();
 
     public static Map<String, Integer> caseIdRowNumMapping = new HashMap<String, Integer>();
     public static Map<String, Integer> cellNameCellNumMapping = new HashMap<String, Integer>();
