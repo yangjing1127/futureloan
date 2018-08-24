@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesUtil {
-    public static String caseConfigPath = "src/test/resources/config/caseConfig.properties";
+    public static String caseConfigPath = "src/main/resources/config/caseConfig.properties";
 
     public  static String getCaseFile() {
         String caseFile = "";
