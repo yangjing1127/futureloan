@@ -30,7 +30,6 @@ public class LoginCase extends BaseCase{
 
     @DataProvider(name = "datas")
     public Object[][] datas() {
-        String[] cellNames={"CaseId(用例编号)","ApiId(接口编号)","Params(参数)"};
 //        Object[][] datas = ExcelUtil.readDataByCellNames("src/main/resources/cases_v3.xlsx","用例",cellNames);
         Object[][] datas=CaseUtil.datas("2",cellNames);
         return datas;

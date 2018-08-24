@@ -24,7 +24,7 @@ public class HttpClientUtil {
     public static ArrayList<InterfaceInfo> rests=new ArrayList<InterfaceInfo>();
 
     static {
-        ExcelUtil.loadDatas("src/main/resources/cases_v4.xlsx","接口信息",InterfaceInfo.class);
+        ExcelUtil.loadDatas(ExcelUtil.caseFilePath,"接口信息",InterfaceInfo.class);
     }
 
     public static Map<String,String> authorizeInfoMap =new HashMap<String, String>();

@@ -5,12 +5,15 @@ import com.yj.util.CaseUtil;
 import com.yj.util.ExcelUtil;
 import com.yj.util.HttpClientUtil;
 import com.yj.util.InterfaceInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Map;
 import java.util.Set;
 
+@SpringBootTest
 public class RegisterCase extends BaseCase{
 
 //    @Test(dataProvider = "datas")
@@ -28,7 +31,6 @@ public class RegisterCase extends BaseCase{
 
     @DataProvider(name = "datas")
     public Object[][] datas() {
-        String[] cellNames={"CaseId(用例编号)","ApiId(接口编号)","Params(参数)"};
 //        Object[][] datas = ExcelUtil.readDataByCellNames("src/main/resources/cases_v3.xlsx","用例",cellNames);//效率低
         Object[][] datas=CaseUtil.datas("1",cellNames);
         return datas;
