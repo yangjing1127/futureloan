@@ -9,6 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 数据库数据校验工具类
+ * 每条用例可能需要验证多个数据表
+ * 循环查询数据库结果后，将结果按照sql的编号no 保存在数据列表中转为json写入到excel
+ */
 public class DBCheckUtil {
     public static String validate(String preValidateSql) {
         //json转List<DBCheckBean>
@@ -42,7 +47,6 @@ public class DBCheckUtil {
         map.put("1","123123132132");
         demo.setColumnLablesAndValues(map);
         res.add(demo);
-
         System.out.println(JSONObject.toJSONString(res));
     }
 }
