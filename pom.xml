@@ -135,12 +135,12 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/main/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <properties>
-                        <property>
-                            <name>usedefaultlisteners</name>
-                            <value>false</value>
-                        </property>
-                    </properties>
+                    <!--<properties>-->
+                        <!--<property>-->
+                            <!--<name>usedefaultlisteners</name>-->
+                            <!--<value>false</value>-->
+                        <!--</property>-->
+                    <!--</properties>-->
                     <!-- 使allure-results在target文件夹下（很重要） -->
                     <workingDirectory>target/</workingDirectory>
                 </configuration>
@@ -152,14 +152,14 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<source>1.7</source>-->
+                    <!--<target>1.7</target>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
 
         <resources>
