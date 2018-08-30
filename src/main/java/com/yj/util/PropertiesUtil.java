@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesUtil {
-    public static String caseConfigPath = "src/main/resources/config/caseConfig.properties";
+    public static String caseConfigPath = "src/test/resources/config/caseConfig.properties";
 
     public  static String getCaseFile() {
         String caseFile = "";
@@ -19,7 +19,7 @@ public class PropertiesUtil {
             );
             properties.load(inputStream);
             caseFile = properties.getProperty("caseFile");
-            System.out.println(caseFile);
+            System.out.println("PropertiesUtil:"+caseFile);
         } catch (Exception e) {
             e.printStackTrace();
         }

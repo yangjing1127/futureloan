@@ -1,6 +1,7 @@
 package com.yj.util;
 
 import com.yj.bean.Case;
+import com.yj.bean.VariableConfiguration;
 import com.yj.bean.WriteBackData;
 import org.apache.poi.ss.usermodel.*;
 
@@ -122,6 +123,9 @@ public class ExcelUtil {
                 } else if (object instanceof InterfaceInfo) {
                     InterfaceInfo info = (InterfaceInfo) object;
                     HttpClientUtil.rests.add(info);
+                }else if(object instanceof VariableConfiguration){
+                    VariableConfiguration configuration=(VariableConfiguration) object;
+                    VariableConfigurationUtil.configurationList.add(configuration);
                 }
             }
         } catch (Exception e) {

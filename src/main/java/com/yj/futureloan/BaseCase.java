@@ -1,9 +1,7 @@
 package com.yj.futureloan;
 
-import com.yj.util.DBCheckUtil;
-import com.yj.util.ExcelUtil;
-import com.yj.util.HttpClientUtil;
-import com.yj.util.JDBCUtil;
+import com.yj.bean.VariableConfiguration;
+import com.yj.util.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.util.StringUtils;
@@ -20,6 +18,11 @@ public class BaseCase  {
 
     @Test(dataProvider = "datas")
     public void testFutureLoan(String caseId,String apiId,String paramsStr,String preValidateSql,String afterValidateSql){
+
+        //替换变量为真实参数
+        paramsStr=VariableConfigurationUtil.replaceParam(paramsStr);
+        preValidateSql=VariableConfigurationUtil.replaceParam(preValidateSql);
+        afterValidateSql=VariableConfigurationUtil.replaceParam(afterValidateSql);
 
         if(!StringUtils.isEmpty(preValidateSql)){
             //接口调用前的数据写入
