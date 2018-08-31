@@ -1,4 +1,4 @@
-package com.yj.futureloan;
+package com.yj.futureloan.cases;
 
 public class RegisterParam {
     private  String mobilephone;

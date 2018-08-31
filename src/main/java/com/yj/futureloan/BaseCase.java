@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  */
 
 public class BaseCase  {
-    String[] cellNames={"CaseId(用例编号)","ApiId(接口编号)","Params(参数)","PreValidateSql(接口执行前的脚本验证)","AfterValidateSql(接口执行后的脚本验证)"};
+    public String[] cellNames={"CaseId(用例编号)","ApiId(接口编号)","Params(参数)","PreValidateSql(接口执行前的脚本验证)","AfterValidateSql(接口执行后的脚本验证)"};
 
     @Test(dataProvider = "datas")
     public void testFutureLoan(String caseId,String apiId,String paramsStr,String preValidateSql,String afterValidateSql){

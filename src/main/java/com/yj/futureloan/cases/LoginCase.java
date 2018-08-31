@@ -1,39 +1,36 @@
-package com.yj.futureloan;
+package com.yj.futureloan.cases;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yj.futureloan.BaseCase;
 import com.yj.util.CaseUtil;
-import com.yj.util.ExcelUtil;
-import com.yj.util.HttpClientUtil;
-import com.yj.util.InterfaceInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 import java.util.Map;
 import java.util.Set;
 
-@SpringBootTest
-public class RegisterCase extends BaseCase{
+public class LoginCase extends BaseCase {
 
 //    @Test(dataProvider = "datas")
 //    public void testFutureLoan(String caseId,String apiId,String paramsStr) {
 ////        System.out.println("用例编号:"+caseId+";参数："+paramsStr);
 ////        InterfaceInfo interfaceInfo=CaseUtil.getInterfaceByCaseId(caseId);
 ////        System.out.println(CaseUtil.getInterfaceByCaseId(caseId));
-//
+////        String actualResult=HttpClientUtil.request(interfaceInfo.getUrl(),interfaceInfo.getType(),paramsStr);
 //        String url=HttpClientUtil.getInterfaceUrlByApiId(apiId);
 //        String type=HttpClientUtil.getInterfaceTypeByApiId(apiId);
 //        String actualResult=HttpClientUtil.request(url,type,paramsStr);
+//        //完成接口调用
 //        System.out.println(actualResult);
+//
 //    }
 
 
     @DataProvider(name = "datas")
     public Object[][] datas() {
-//        Object[][] datas = ExcelUtil.readDataByCellNames("src/main/resources/cases_v3.xlsx","用例",cellNames);//效率低
-        Object[][] datas=CaseUtil.datas("1",cellNames);
+//        Object[][] datas = ExcelUtil.readDataByCellNames("src/main/resources/cases_v3.xlsx","用例",cellNames);
+        Object[][] datas=CaseUtil.datas("2",cellNames);
         return datas;
+
     }
 
     public static void main(String[] args){
@@ -45,6 +42,6 @@ public class RegisterCase extends BaseCase{
         for (Map.Entry<String ,String> entry:entries){
             System.out.println("参数名称"+entry.getKey()+"参数值"+entry.getValue());
         }
-//       System.out.println( CaseUtil.getInterfaceByCaseId("1"));
+        System.out.println( CaseUtil.getInterfaceByCaseId("1"));
     }
 }

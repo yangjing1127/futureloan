@@ -2,21 +2,21 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Default Suite">
     <test name="futureloan">
-        <classes>
-            <class name="com.yj.futureloan.RegisterCase">
-                <!--<methods>
-                    <include name="testFutureLoan"/>
-                </methods>-->
-            </class>
-            <!-- com.yj.futureloan.RegisterCase 注册-->
-            <class name="com.yj.futureloan.LoginCase">
-                <!-- <methods>
-                     <include name="testFutureLoan"/>
-                 </methods>-->
-            </class> <!-- com.yj.futureloan.LoginCase 登录-->
 
-            <class name="com.yj.futureloan.RechargeCase">
-            </class><!-- com.yj.futureloan.RegisterCase 充值-->
+        <packages>
+            <package name="com.yj.futureloan.cases"></package>
+        </packages>
+        <classes>
+            <!--<class name="com.yj.futureloan.cases.RegisterCase">-->
+            <!--</class>-->
+            <!-- com.yj.futureloan.cases.RegisterCase 注册-->
+            <!--<class name="com.yj.futureloan.cases.LoginCase">-->
+            <!--</class> -->
+            <!-- com.yj.futureloan.cases.LoginCase 登录-->
+
+            <!--<class name="com.yj.futureloan.cases.RechargeCase">-->
+            <!--</class>-->
+            <!-- com.yj.futureloan.cases.RegisterCase 充值-->
         </classes>
     </test> <!-- futureloan -->
 </suite> <!-- Default Suite -->
